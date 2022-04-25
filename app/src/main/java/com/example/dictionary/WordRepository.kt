@@ -1,6 +1,7 @@
 package com.example.dictionary
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 
 object WordRepository {
     var db : AppDatabase? = null
@@ -25,5 +26,9 @@ object WordRepository {
         val newWord = WordEntity(word, meaning, example, synonym)
         newWord?.let { WordEntity(word,  meaning, example, synonym) }
             .let { db?.questionDao()?.insertAll(it) }
+    }
+
+    fun getCount(): LiveData<Int>? {
+        return db?.questionDao()?.getCount()
     }
 }
