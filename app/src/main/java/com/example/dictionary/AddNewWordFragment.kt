@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import androidx.lifecycle.Observer
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.dictionary.databinding.FragmentAddNewWordBinding
@@ -32,6 +32,16 @@ class AddNewWordFragment : Fragment() {
                 Toast.makeText(requireContext(), "added successfully", Toast.LENGTH_SHORT).show()
                  addToDatabase(binding.tfWord.text.toString(), binding.tfMeaning.text.toString(), binding.tfSynonym.text.toString(), binding.tfMeaning.text.toString())
         }
+
+        observeAll()
+    }
+
+    private fun observeAll() {
+        val countObserver = Observer<Int> { count ->
+            binding.textView3.text = count.toString()
+        }
+
+        viewModel.countLiveData?.observe(viewLifecycleOwner, countObserver)
     }
 
     private fun addToDatabase(word: String, meaning: String, example: String, synonym: String) {
