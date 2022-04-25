@@ -29,7 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
 
                 Room.databaseBuilder(context.applicationContext,
                     AppDatabase::class.java, "myDB")
-                    //.allowMainThreadQueries()
+                    .allowMainThreadQueries()
                     .build()
             }
             return db
