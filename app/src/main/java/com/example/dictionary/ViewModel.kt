@@ -13,16 +13,17 @@ import kotlin.concurrent.thread
 
 class MainViewModel (app: Application) : AndroidViewModel(app) {
 
+    val countLiveData : LiveData<Int>?
 
     init {
-//        WordRepository.initDB(app.applicationContext)
+        WordRepository.initDB(app.applicationContext)
 //        viewModelScope.launch {
 //            WordRepository.initDB(app.applicationContext)
 //        }
-//
-        thread{
-            WordRepository.initDB(app.applicationContext)
-        }
+//        thread{
+//            WordRepository.initDB(app.applicationContext)
+//        }
+        countLiveData = WordRepository.getCount()
     }
 
     fun addAccountToDatabase(word: String, meaning: String, example: String, synonym: String) {
