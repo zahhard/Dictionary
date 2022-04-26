@@ -35,6 +35,9 @@ class AddNewWordFragment : Fragment() {
         sharedPreferences =
             requireActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
 
+        binding.floatingActionButton2.setOnClickListener {
+            findNavController().navigate(R.id.action_addNewWordFragment_to_searchFragment)
+        }
         binding.button.setOnClickListener {
             if (checkValidate() && !sharedPreferences.getBoolean("isRemember", false)) {
                 addToDatabase(
@@ -47,7 +50,12 @@ class AddNewWordFragment : Fragment() {
             }
             if (sharedPreferences.getBoolean("isRemember", false)){
                 Toast.makeText(requireContext(), "dd", Toast.LENGTH_SHORT).show()
-                viewModel.update(WordEntity(binding.tfWord.text.toString(),binding.tfMeaning.text.toString(),binding.tfExample.text.toString(),binding.tfSynonym.text.toString() ))
+                viewModel.update(WordEntity(
+                    binding.tfWord.text.toString(),
+                    binding.tfMeaning.text.toString(),
+                    binding.tfExample.text.toString()
+                    ,binding.tfSynonym.text.toString()
+                ))
                 findNavController().navigate(R.id.action_addNewWordFragment_to_searchFragment)
             }
         }
