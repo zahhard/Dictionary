@@ -33,4 +33,8 @@ class MainViewModel (app: Application) : AndroidViewModel(app) {
     fun search (search: String): WordEntity? {
         return WordRepository.search(search)
     }
+
+    fun searchInPersian (search: String): WordEntity? {
+        return WordRepository.searchInPersian(search)
+    }
 }

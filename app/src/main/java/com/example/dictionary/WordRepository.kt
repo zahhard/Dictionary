@@ -35,4 +35,8 @@ object WordRepository {
     fun search(search: String) : WordEntity? {
         return db?.questionDao()?.loadWord(search)
     }
+
+    fun searchInPersian(search: String) : WordEntity? {
+        return db?.questionDao()?.loadWordInPersian(search)
+    }
 }

@@ -54,4 +54,8 @@ interface WordDao {
 
     @Query("SELECT * FROM WordEntity WHERE word LIKE :search")
     fun loadWord(search: String?): WordEntity
+
+    @Query("SELECT * FROM WordEntity WHERE meaning LIKE :search")
+    fun loadWordInPersian(search: String?): WordEntity
+
 }
