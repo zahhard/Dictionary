@@ -58,6 +58,13 @@ class SearchFragment : Fragment() {
             binding.tvSynonym.text = word.synonym.toString()
         }
 
+        binding.floatingActionButton.setOnClickListener {
+            val editor: SharedPreferences.Editor = ppreferences.edit()
+            editor.clear()
+            editor.apply()
+            findNavController().navigate(R.id.action_searchFragment_to_addNewWordFragment)
+
+        }
         // viewModel.search(searchText)?.observe(viewLifecycleOwner, countObserver)
     }
 

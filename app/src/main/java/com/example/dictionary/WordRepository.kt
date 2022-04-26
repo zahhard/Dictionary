@@ -24,7 +24,7 @@ object WordRepository {
         )
     }
 
-    fun insertAccount(word: String, meaning: String, example: String, synonym: String//, url :String
+    fun insertWord(word: String, meaning: String, example: String, synonym: String//, url :String
     ){
         val newWord = WordEntity(word, meaning, example, synonym)
         newWord?.let { WordEntity(word,  meaning, example, synonym) }

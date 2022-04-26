@@ -2,14 +2,8 @@ package com.example.dictionary
 
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
-import java.util.ArrayList
-import kotlin.concurrent.thread
 
 class MainViewModel (app: Application) : AndroidViewModel(app) {
 
@@ -28,7 +22,7 @@ class MainViewModel (app: Application) : AndroidViewModel(app) {
 
     fun addAccountToDatabase(word: String, meaning: String, example: String, synonym: String//, url : String
         ) {
-        WordRepository.insertAccount(word, meaning, example, synonym//, url
+        WordRepository.insertWord(word, meaning, example, synonym//, url
         )
     }
 
