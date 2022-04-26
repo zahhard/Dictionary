@@ -29,4 +29,8 @@ class MainViewModel (app: Application) : AndroidViewModel(app) {
     fun addAccountToDatabase(word: String, meaning: String, example: String, synonym: String) {
         WordRepository.insertAccount(word, meaning, example, synonym)
     }
+
+    fun search (search: String): WordEntity? {
+        return WordRepository.search(search)
+    }
 }

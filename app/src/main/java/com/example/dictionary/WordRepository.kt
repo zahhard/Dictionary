@@ -31,4 +31,8 @@ object WordRepository {
     fun getCount(): LiveData<Int>? {
         return db?.questionDao()?.getCount()
     }
+
+    fun search(search: String) : WordEntity? {
+        return db?.questionDao()?.loadWord(search)
+    }
 }
