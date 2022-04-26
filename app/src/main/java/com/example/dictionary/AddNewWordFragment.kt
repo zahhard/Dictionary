@@ -38,7 +38,7 @@ class AddNewWordFragment : Fragment() {
 
     private fun observeAll() {
         val countObserver = Observer<Int> { count ->
-            binding.textView3.text = count.toString()
+            binding.tvCount.text = count.toString()
         }
 
         viewModel.countLiveData?.observe(viewLifecycleOwner, countObserver)
