@@ -80,10 +80,36 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cornerRadius="15dp"
-        android:layout_marginVertical="15dp"
         android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="15dp"
         android:paddingVertical="15dp"
-        android:text="submit" />
+        android:text="submit"
+        android:textColor="#FFFFFF"
+        app:cornerRadius="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Word Count :    "
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold|italic" />
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold|italic" />
+
+    </LinearLayout>
 
 </LinearLayout>
