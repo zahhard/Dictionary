@@ -51,4 +51,7 @@ interface WordDao {
 
     @Query("DELETE FROM WordEntity")
     fun deleteAll()
+
+    @Query("SELECT * FROM WordEntity WHERE word LIKE :search")
+    fun loadWord(search: String?): WordEntity
 }
