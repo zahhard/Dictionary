@@ -11,6 +11,7 @@ data class WordEntity(
     val meaning : String,
     val example : String,
     val synonym : String,
+  //  val url : String?
 )
 
 
@@ -57,5 +58,8 @@ interface WordDao {
 
     @Query("SELECT * FROM WordEntity WHERE meaning LIKE :search")
     fun loadWordInPersian(search: String?): WordEntity
+
+    @Update(entity = WordEntity::class)
+    fun update(obj: WordEntity)
 
 }

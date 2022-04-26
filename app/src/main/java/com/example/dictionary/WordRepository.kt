@@ -17,12 +17,15 @@ object WordRepository {
 
     private fun addTestData() {
         wordDao?.insertAll(
-            WordEntity("zebra", "گورخر", "Crossing roads is always frightening at first, and the patient may have to relearn how to use pelican and zebra crossings.",""),
-            WordEntity("road", "جاده", "The road, narrow as any country road, was a single-lane journey for any vehicle.", "artery")
+            WordEntity("zebra", "گورخر", "Crossing roads is always frightening at first, and the patient may have to relearn how to use pelican and zebra crossings.",""//, "https://en.wikipedia.org/wiki/Zebra"
+            ),
+            WordEntity("road", "جاده", "The road, narrow as any country road, was a single-lane journey for any vehicle.", "artery"//, "https://en.wikipedia.org/wiki/Road?wprov=srpw1_0"
+            )
         )
     }
 
-    fun insertAccount(word: String, meaning: String, example: String, synonym: String){
+    fun insertAccount(word: String, meaning: String, example: String, synonym: String//, url :String
+    ){
         val newWord = WordEntity(word, meaning, example, synonym)
         newWord?.let { WordEntity(word,  meaning, example, synonym) }
             .let { db?.questionDao()?.insertAll(it) }
@@ -38,5 +41,9 @@ object WordRepository {
 
     fun searchInPersian(search: String) : WordEntity? {
         return db?.questionDao()?.loadWordInPersian(search)
+    }
+
+    fun update (item: WordEntity){
+        db?.questionDao()?.update(item)
     }
 }

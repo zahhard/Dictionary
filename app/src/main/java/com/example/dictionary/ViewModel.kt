@@ -26,8 +26,10 @@ class MainViewModel (app: Application) : AndroidViewModel(app) {
         countLiveData = WordRepository.getCount()
     }
 
-    fun addAccountToDatabase(word: String, meaning: String, example: String, synonym: String) {
-        WordRepository.insertAccount(word, meaning, example, synonym)
+    fun addAccountToDatabase(word: String, meaning: String, example: String, synonym: String//, url : String
+        ) {
+        WordRepository.insertAccount(word, meaning, example, synonym//, url
+        )
     }
 
     fun search (search: String): WordEntity? {
@@ -36,5 +38,9 @@ class MainViewModel (app: Application) : AndroidViewModel(app) {
 
     fun searchInPersian (search: String): WordEntity? {
         return WordRepository.searchInPersian(search)
+    }
+
+    fun update (item: WordEntity){
+        WordRepository.update(item)
     }
 }
