@@ -45,7 +45,7 @@ class AddNewWordFragment : Fragment() {
                     binding.tfMeaning.text.toString(),
                     binding.tfSynonym.text.toString(),
                     binding.tfMeaning.text.toString(),
-                  //  binding.tfUrl.text.toString()
+                    binding.tfUrl.text.toString()
                 )
             }
             if (sharedPreferences.getBoolean("isRemember", false)){
@@ -54,7 +54,8 @@ class AddNewWordFragment : Fragment() {
                     binding.tfWord.text.toString(),
                     binding.tfMeaning.text.toString(),
                     binding.tfExample.text.toString()
-                    ,binding.tfSynonym.text.toString()
+                    ,binding.tfSynonym.text.toString(),
+                  binding.tfUrl.text.toString()
                 ))
                 findNavController().navigate(R.id.action_addNewWordFragment_to_searchFragment)
             }
@@ -86,9 +87,9 @@ class AddNewWordFragment : Fragment() {
         viewModel.countLiveData?.observe(viewLifecycleOwner, countObserver)
     }
 
-    private fun addToDatabase(word: String, meaning: String, example: String, synonym: String//, url : String
+    private fun addToDatabase(word: String, meaning: String, example: String, synonym: String, url : String
     ) {
-        viewModel.addAccountToDatabase(word, meaning, example, synonym//, url
+        viewModel.addAccountToDatabase(word, meaning, example, synonym, url
         )
     }
 
