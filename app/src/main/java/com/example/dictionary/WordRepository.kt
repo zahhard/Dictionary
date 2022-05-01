@@ -17,17 +17,21 @@ object WordRepository {
 
     private fun addTestData() {
         wordDao?.insertAll(
-            WordEntity("zebra", "گورخر", "Crossing roads is always frightening at first, and the patient may have to relearn how to use pelican and zebra crossings.",""//, "https://en.wikipedia.org/wiki/Zebra"
+            WordEntity("zebra", "گورخر",
+                "Crossing roads is always frightening at first, and the patient may have to relearn how to use pelican and zebra crossings."
+                ,"fff", "https://en.wikipedia.org/wiki/Zebra"
             ),
-            WordEntity("road", "جاده", "The road, narrow as any country road, was a single-lane journey for any vehicle.", "artery"//, "https://en.wikipedia.org/wiki/Road?wprov=srpw1_0"
+            WordEntity("road", "جاده",
+                "The road, narrow as any country road, was a single-lane journey for any vehicle.", "artery"
+                , "https://en.wikipedia.org/wiki/Road?wprov=srpw1_0"
             )
         )
     }
 
-    fun insertWord(word: String, meaning: String, example: String, synonym: String//, url :String
+    fun insertWord(word: String, meaning: String, example: String, synonym: String, url :String
     ){
-        val newWord = WordEntity(word, meaning, example, synonym)
-        newWord?.let { WordEntity(word,  meaning, example, synonym) }
+        val newWord = WordEntity(word, meaning, example, synonym ,url )
+        WordEntity(word,  meaning, example, synonym, url)
             .let { db?.questionDao()?.insertAll(it) }
     }
 
@@ -45,5 +49,9 @@ object WordRepository {
 
     fun update (item: WordEntity){
         db?.questionDao()?.update(item)
+    }
+
+    fun delete(temp: WordEntity) {
+        db?.questionDao()?.deleteWord(temp)
     }
 }
