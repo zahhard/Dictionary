@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -35,20 +36,17 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ppreferences =  requireActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
-
+      //  viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding.button2.setOnClickListener {
             search()
         }
 
-        binding.btnEdit.setOnClickListener {
-            val editor: SharedPreferences.Editor = ppreferences.edit()
-            editor.putBoolean("isRemember", true)
-            editor.putString("word", binding.tvWord.text.toString())
-            editor.putString("meaning", binding.tvMeaning.text.toString())
-            editor.putString("example", binding.tvExample.text.toString())
-            editor.putString("synonym", binding.tvSynonym.text.toString())
-            editor.apply()
-            findNavController().navigate(R.id.action_searchFragment_to_addNewWordFragment)
+        binding.imageViewEdit.setOnClickListener {
+            sentWithSharePref()
+        }
+
+        binding.imageViewDelete.setOnClickListener {
+            delete()
         }
 
         val countObserver = Observer<WordEntity> { word ->
@@ -68,6 +66,30 @@ class SearchFragment : Fragment() {
         // viewModel.search(searchText)?.observe(viewLifecycleOwner, countObserver)
     }
 
+    private fun delete() {
+        Toast.makeText(requireContext(), "deleted", Toast.LENGTH_SHORT).show()
+//        var temp = WordEntity(
+//            binding.tvWord.text.toString(),
+//            binding.tvMeaning.text.toString(),
+//            binding.tvExample.text.toString(),
+//            binding.tvSynonym.text.toString(),
+//            binding.tfUrl.text.toString()
+//        )
+        var a = viewModel.search(binding.tvWord.text.toString())
+        viewModel.deleteWord(a!!)
+    }
+
+    private fun sentWithSharePref() {
+        val editor: SharedPreferences.Editor = ppreferences.edit()
+        editor.putBoolean("isRemember", true)
+        editor.putString("word", binding.tvWord.text.toString())
+        editor.putString("meaning", binding.tvMeaning.text.toString())
+        editor.putString("example", binding.tvExample.text.toString())
+        editor.putString("synonym", binding.tvSynonym.text.toString())
+        editor.apply()
+        findNavController().navigate(R.id.action_searchFragment_to_addNewWordFragment)
+    }
+
     private fun search() {
         searchText = binding.editTextTextPersonName.text.toString()
         when {
@@ -76,14 +98,14 @@ class SearchFragment : Fragment() {
                 binding.tvMeaning.text = viewModel.search(searchText)?.meaning.toString()
                 binding.tvExample.text = viewModel.search(searchText)?.example.toString()
                 binding.tvSynonym.text = viewModel.search(searchText)?.synonym.toString()
-               // binding.tvUrl.text = viewModel.search(searchText)?.url.toString()
+               binding.tvUrl.text = viewModel.search(searchText)?.url.toString()
             }
             viewModel.searchInPersian(searchText)?.word != null -> {
                 binding.tvWord.text = viewModel.searchInPersian(searchText)?.word.toString()
                 binding.tvMeaning.text = viewModel.searchInPersian(searchText)?.meaning.toString()
                 binding.tvExample.text = viewModel.searchInPersian(searchText)?.example.toString()
                 binding.tvSynonym.text = viewModel.searchInPersian(searchText)?.synonym.toString()
-               // binding.tvUrl.text = viewModel.searchInPersian(searchText)?.url.toString()
+               binding.tvUrl.text = viewModel.searchInPersian(searchText)?.url.toString()
             }
             else -> {
                 binding.editTextTextPersonName.text = null
