@@ -7,11 +7,11 @@ import androidx.room.*
 
 @Entity
 data class WordEntity(
-    @PrimaryKey val word : String,
-    val meaning : String,
-    val example : String,
-    val synonym : String,
-  //  val url : String?
+    @PrimaryKey var word : String,
+    var meaning : String,
+    var example : String,
+    var synonym : String,
+    val url : String
 )
 
 
@@ -61,5 +61,8 @@ interface WordDao {
 
     @Update(entity = WordEntity::class)
     fun update(obj: WordEntity)
+
+    @Delete(entity = WordEntity::class)
+    fun deleteWord(word: WordEntity)
 
 }
