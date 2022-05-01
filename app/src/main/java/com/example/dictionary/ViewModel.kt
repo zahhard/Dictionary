@@ -4,25 +4,28 @@ package com.example.dictionary
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
-class MainViewModel (app: Application) : AndroidViewModel(app) {
+public class MainViewModel constructor(val app: Application) : AndroidViewModel(app) {
 
     val countLiveData : LiveData<Int>?
 
     init {
-        WordRepository.initDB(app.applicationContext)
-//        viewModelScope.launch {
-//            WordRepository.initDB(app.applicationContext)
-//        }
+       // WordRepository.initDB(app.applicationContext)
+
+        viewModelScope.launch {
+    WordRepository.initDB(app.applicationContext)
+  }
 //        thread{
 //            WordRepository.initDB(app.applicationContext)
 //        }
         countLiveData = WordRepository.getCount()
     }
 
-    fun addAccountToDatabase(word: String, meaning: String, example: String, synonym: String//, url : String
+    fun addAccountToDatabase(word: String, meaning: String, example: String, synonym: String, url : String
         ) {
-        WordRepository.insertWord(word, meaning, example, synonym//, url
+        WordRepository.insertWord(word, meaning, example, synonym , url
         )
     }
 
@@ -37,4 +40,10 @@ class MainViewModel (app: Application) : AndroidViewModel(app) {
     fun update (item: WordEntity){
         WordRepository.update(item)
     }
+
+    fun deleteWord(temp: WordEntity) {
+        WordRepository.delete(temp)
+    }
+
+
 }
