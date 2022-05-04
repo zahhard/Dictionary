@@ -59,7 +59,7 @@ interface WordDao {
     @Query("SELECT * FROM WordEntity WHERE meaning LIKE :search")
     fun loadWordInPersian(search: String?): WordEntity
 
-    @Update(entity = WordEntity::class)
+    @Update//(entity = WordEntity::class)
     fun update(obj: WordEntity)
 
     @Delete(entity = WordEntity::class)

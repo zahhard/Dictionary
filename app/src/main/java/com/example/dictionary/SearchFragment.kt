@@ -36,34 +36,37 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ppreferences =  requireActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
-      //  viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding.button2.setOnClickListener {
             search()
         }
-
         binding.imageViewEdit.setOnClickListener {
             sentWithSharePref()
         }
-
         binding.imageViewDelete.setOnClickListener {
             delete()
         }
-
-        val countObserver = Observer<WordEntity> { word ->
-            binding.tvWord.text = word.word.toString()
-            binding.tvMeaning.text = word.meaning.toString()
-            binding.tvExample.text = word.example.toString()
-            binding.tvSynonym.text = word.synonym.toString()
-        }
-
         binding.floatingActionButton.setOnClickListener {
-            val editor: SharedPreferences.Editor = ppreferences.edit()
-            editor.clear()
-            editor.apply()
-            findNavController().navigate(R.id.action_searchFragment_to_addNewWordFragment)
-
+            navigateToAddWord()
         }
-        // viewModel.search(searchText)?.observe(viewLifecycleOwner, countObserver)
+        binding.imageViewWebsite.setOnClickListener {
+            if (binding.tvWord.text.isNullOrBlank()){
+                AlertDialog.Builder(requireContext())
+                    .setMessage("Not found any website !")
+                    .setPositiveButton("ok") { _, _ -> }
+                    .setCancelable(false)
+                    .show()
+            }
+            else{
+                findNavController().navigate(R.id.action_searchFragment_to_webFragment)
+            }
+        }
+    }
+
+    private fun navigateToAddWord() {
+        val editor: SharedPreferences.Editor = ppreferences.edit()
+        editor.clear()
+        editor.apply()
+        findNavController().navigate(R.id.action_searchFragment_to_addNewWordFragment)
     }
 
     private fun delete() {
@@ -118,7 +121,11 @@ class SearchFragment : Fragment() {
         }
     }
 
-//    private fun nullCheck() {
-//        if (viewModel.sea)
-//    }
+
+    val countObserver = Observer<WordEntity> { word ->
+        binding.tvWord.text = word.word.toString()
+        binding.tvMeaning.text = word.meaning.toString()
+        binding.tvExample.text = word.example.toString()
+        binding.tvSynonym.text = word.synonym.toString()
+    }
 }
