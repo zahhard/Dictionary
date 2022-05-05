@@ -54,4 +54,8 @@ object WordRepository {
     fun delete(temp: WordEntity) {
         db?.questionDao()?.deleteWord(temp)
     }
+
+    fun showAllAccounts() : LiveData<List<WordEntity>>?{
+        return  db?.questionDao()?.getAll()
+    }
 }

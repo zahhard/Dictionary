@@ -6,10 +6,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import java.util.ArrayList
 
 public class MainViewModel constructor(val app: Application) : AndroidViewModel(app) {
 
     val countLiveData : LiveData<Int>?
+    val list: LiveData<List<WordEntity>>?
+    val  listAccount = ArrayList<WordEntity>()
 
     init {
        // WordRepository.initDB(app.applicationContext)
@@ -21,6 +24,7 @@ public class MainViewModel constructor(val app: Application) : AndroidViewModel(
 //            WordRepository.initDB(app.applicationContext)
 //        }
         countLiveData = WordRepository.getCount()
+        list = WordRepository.showAllAccounts()
     }
 
     fun addAccountToDatabase(word: String, meaning: String, example: String, synonym: String, url : String

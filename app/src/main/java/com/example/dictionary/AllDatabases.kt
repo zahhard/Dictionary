@@ -44,6 +44,9 @@ abstract class AppDatabase : RoomDatabase() {
 @Dao
 interface WordDao {
 
+    @Query ("SELECT * FROM WordEntity")
+    fun getAll() : LiveData<List<WordEntity>>
+
     @Query ("SELECT COUNT(*) FROM WordEntity")
     fun getCount(): LiveData<Int>
 

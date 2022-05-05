@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_gragh"
-    app:startDestination="@id/searchFragment">
+    app:startDestination="@id/masterFragment">
 
     <fragment
         android:id="@+id/addNewWordFragment"
@@ -31,5 +31,10 @@
         android:name="com.example.dictionary.WebFragment"
         android:label="fragment_web"
         tools:layout="@layout/fragment_web" />
+    <fragment
+        android:id="@+id/masterFragment"
+        android:name="com.example.dictionary.MasterFragment"
+        android:label="fragment_master"
+        tools:layout="@layout/fragment_master" />
 
 </navigation>
