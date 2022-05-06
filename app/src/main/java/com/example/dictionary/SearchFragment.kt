@@ -36,6 +36,9 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ppreferences =  requireActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
+
+
+        search(viewModel.search.toString())
         binding.button2.setOnClickListener {
             search()
         }
@@ -95,6 +98,33 @@ class SearchFragment : Fragment() {
 
     private fun search() {
         searchText = binding.editTextTextPersonName.text.toString()
+        when {
+            viewModel.search(searchText)?.word != null -> {
+                binding.tvWord.text = viewModel.search(searchText)?.word.toString()
+                binding.tvMeaning.text = viewModel.search(searchText)?.meaning.toString()
+                binding.tvExample.text = viewModel.search(searchText)?.example.toString()
+                binding.tvSynonym.text = viewModel.search(searchText)?.synonym.toString()
+               binding.tvUrl.text = viewModel.search(searchText)?.url.toString()
+            }
+            viewModel.searchInPersian(searchText)?.word != null -> {
+                binding.tvWord.text = viewModel.searchInPersian(searchText)?.word.toString()
+                binding.tvMeaning.text = viewModel.searchInPersian(searchText)?.meaning.toString()
+                binding.tvExample.text = viewModel.searchInPersian(searchText)?.example.toString()
+                binding.tvSynonym.text = viewModel.searchInPersian(searchText)?.synonym.toString()
+               binding.tvUrl.text = viewModel.searchInPersian(searchText)?.url.toString()
+            }
+            else -> {
+                binding.editTextTextPersonName.text = null
+                AlertDialog.Builder(requireContext())
+                    .setMessage("Not found !")
+                    .setPositiveButton("ok") { _, _ -> }
+                    .setCancelable(false)
+                    .show()
+            }
+        }
+    }
+
+    private fun search(searchText : String) {
         when {
             viewModel.search(searchText)?.word != null -> {
                 binding.tvWord.text = viewModel.search(searchText)?.word.toString()

@@ -13,6 +13,7 @@ public class MainViewModel constructor(val app: Application) : AndroidViewModel(
     val countLiveData : LiveData<Int>?
     val list: LiveData<List<WordEntity>>?
     val  listAccount = ArrayList<WordEntity>()
+    var search : String? = null
 
     init {
        // WordRepository.initDB(app.applicationContext)

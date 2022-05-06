@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.dictionary.databinding.FragmentMasterBinding
 import com.example.dictionary.databinding.FragmentSearchBinding
 
@@ -30,16 +31,20 @@ class MasterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = CustomAdapter(viewModel.listAccount)
+        val adapter = CustomAdapter(viewModel.listAccount){ word -> goToDetail(word) }
         binding.recyclerview.adapter = adapter
+
 
 
         viewModel.list?.observe(requireActivity()){
             it.forEach {
-                //خب اینجا تو حلقه لیست اکانت هارو بهت میده
-                //binding.tvAccountNum.text=it.accountNumber.toString()
                 viewModel.listAccount.add(it)
             }
         }
+    }
+
+    private fun goToDetail(word: String) {
+        findNavController().navigate(R.id.action_masterFragment_to_searchFragment)
+        viewModel.search = word
     }
 }

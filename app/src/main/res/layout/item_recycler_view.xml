@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/word"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_weight="1"
         android:textSize="18sp"
         android:textColor="@color/black"
@@ -20,11 +20,17 @@
 
     <TextView
         android:id="@+id/meaning"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_weight="1"
         android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:text="@{item.meaning}"/>
+
+    <Button
+        android:id="@+id/button_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="detail" />
 </LinearLayout>
